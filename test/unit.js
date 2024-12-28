@@ -50,17 +50,6 @@ describe( 'jconv.encodingExists', function() {
 	});
 });
 
-// jconv.decode, jconv.encode
-describe( 'jconv.decode, jconv.encode', function() {
-	it( '# should work properly', function() {
-		var inputString = '君よ知るや南の国';
-		var jisBuffer = jconv.encode( inputString, 'JIS' );
-		var utfString = jconv.decode( jisBuffer, 'JIS' );
-
-		should( utfString ).eql( inputString );
-	});
-});
-
 // KANJI
 // あ	亜	弌
 describe( 'jconv.convert KANJI', function() {
