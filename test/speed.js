@@ -1,9 +1,9 @@
 'use strict';
 
 var fs        = require( 'fs' ),
-	Benchmark = require( 'benchmark' ),
-	jconv     = require( __dirname + '/../jconv.min' ),
-	Iconv     = require( 'iconv' ).Iconv;
+    Benchmark = require( 'benchmark' ),
+    jconv     = require( __dirname + '/../jconv' ),
+    Iconv     = require( 'iconv' ).Iconv;
 
 var inputPath  = __dirname + '/input/KOKORO/',
 	chartPath  = __dirname + '/chart/';
@@ -18,16 +18,17 @@ var logs = {};
 
 var logText = '';
 
-function speedTest( from, to ) {
-	var FROM    = from.toUpperCase(),
-		TO      = to.toUpperCase(),
-		fixFROM = fixEncoding[ FROM ] || FROM,
-		fixTO   = fixEncoding[ TO ] || TO;
+function speedTest( to ) {
+	var FROM    = 'UNICODE',
+		  TO      = to.toUpperCase(),
+		  fixFROM = fixEncoding[ FROM ] || FROM,
+		  fixTO   = fixEncoding[ TO ] || TO;
 
 	var _jconv  = jconv;
 	var _iconv  = new Iconv( fixFROM, fixTO + '//TRANSLIT//IGNORE' );
 
 	var buffer  = fs.readFileSync( inputPath + FROM + '.TXT' );
+  var buf_str = buffer.toString();
 	var title   = '[ ' + FROM + ' -> ' + TO + ' ]';
 
 	log( title );
@@ -35,10 +36,10 @@ function speedTest( from, to ) {
 	var suite = new Benchmark.Suite;
 	suite
 		.add( 'jconv', function() {
-			_jconv.convert( buffer, FROM, TO );
+			_jconv.convert( buf_str, TO );
 		})
 		.add( 'iconv', function() {
-			_iconv.convert( buffer );
+			_iconv.convert( buf_str );
 		})
 		.on( 'cycle', function( event ) {
 			log( String( event.target ) );
@@ -73,31 +74,8 @@ function writeLog() {
 }
 
 // Unicode
-speedTest( 'UTF8', 'UNICODE' );
-speedTest( 'SJIS', 'UNICODE' );
-speedTest( 'JIS', 'UNICODE' );
-speedTest( 'EUCJP', 'UNICODE' );
-
-speedTest( 'UNICODE', 'UTF8' );
-speedTest( 'UNICODE', 'SJIS' );
-speedTest( 'UNICODE', 'JIS' );
-speedTest( 'UNICODE', 'EUCJP' );
-
-// Basics
-speedTest( 'UTF8', 'SJIS' );
-speedTest( 'UTF8', 'JIS' );
-speedTest( 'UTF8', 'EUCJP' );
-
-speedTest( 'SJIS', 'UTF8' );
-speedTest( 'SJIS', 'JIS' );
-speedTest( 'SJIS', 'EUCJP' );
-
-speedTest( 'JIS', 'UTF8' );
-speedTest( 'JIS', 'SJIS' );
-speedTest( 'JIS', 'EUCJP' );
-
-speedTest( 'EUCJP', 'UTF8' );
-speedTest( 'EUCJP', 'SJIS' );
-speedTest( 'EUCJP', 'JIS' );
+speedTest( 'SJIS' );
+speedTest( 'JIS' );
+speedTest( 'EUCJP' );
 
 writeLog();

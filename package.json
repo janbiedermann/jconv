@@ -9,7 +9,9 @@
   },
   "main": "jconv.js",
   "scripts": {
-    "test": "mocha ./test/unit"
+    "test": "mocha ./test/unit",
+    "bench": "mocha ./test/speed",
+    "debug": "mocha --inspect-brk ./test/unit"
   },
   "engines": {
     "node": ">=0.8.0"
@@ -24,11 +26,9 @@
   "devDependencies": {
     "async": "^0.9.0",
     "benchmark": "^1.0.0",
-    "grunt": "^0.4.5",
-    "grunt-closurecompiler": "^0.9.9",
-    "iconv": "^2.1.4",
-    "mocha": "^2.1.0",
-    "should": "^5.0.0"
+    "iconv": "^3.0.1",
+    "mocha": "^11.0.2",
+    "should": "^13.2.3"
   },
   "license": "MIT"
 }
