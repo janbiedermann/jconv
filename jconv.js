@@ -83,7 +83,7 @@ defineEncoding({
 	name: 'UCS2toJIS',
 
 	convert: function( str ) {
-		let jisBuf   = new Uint8Array( str.length * 4 ), // max 4 bytes per char
+		let jisBuf   = new Uint8Array( str.length * 4 + 3), // max 4 bytes per char
 				offset   = 0,
 				sequence = 0,
 				unicode;
