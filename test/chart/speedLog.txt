@@ -1,12 +1,12 @@
 [ UNICODE -> SJIS ]
-jconv x 239 ops/sec ±7.20% (89 runs sampled)
-iconv x 80.56 ops/sec ±0.99% (71 runs sampled)
+jconv x 234 ops/sec ±6.60% (84 runs sampled)
+iconv x 84.61 ops/sec ±0.79% (75 runs sampled)
 Fastest is jconv
 [ UNICODE -> JIS ]
-jconv x 203 ops/sec ±5.51% (85 runs sampled)
-iconv x 86.71 ops/sec ±1.58% (76 runs sampled)
+jconv x 202 ops/sec ±5.40% (82 runs sampled)
+iconv x 98.97 ops/sec ±0.65% (75 runs sampled)
 Fastest is jconv
 [ UNICODE -> EUCJP ]
-jconv x 207 ops/sec ±6.21% (88 runs sampled)
-iconv x 87.67 ops/sec ±1.38% (77 runs sampled)
+jconv x 261 ops/sec ±6.19% (88 runs sampled)
+iconv x 98.08 ops/sec ±0.76% (74 runs sampled)
 Fastest is jconv

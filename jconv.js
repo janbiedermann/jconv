@@ -11,7 +11,9 @@ import SJISInverted from './tables/SJISInverted.js';
 import JISInverted from './tables/JISInverted.js';
 import JISEXTInverted from './tables/JISEXTInverted.js';
 
-var unknown = '・'.charCodeAt( 0 );
+const unknown = '・'.charCodeAt( 0 );
+const unknownJis = JISInverted[ unknown ];
+const unknownSjis = SJISInverted[ unknown ];
 
 var encodings = {__proto__: null};
 
@@ -50,9 +52,8 @@ defineEncoding({
 	name: 'UCS2toSJIS',
 
 	convert: function( str ) {
-		let unknownSjis = SJISInverted[ unknown ],
-				sjisBuf     = new Uint8Array(str.length * 2), // max 2 bytes per char
-				offset      = 0,
+		let sjisBuf = new Uint8Array(str.length * 2), // max 2 bytes per char
+				offset  = 0,
 				unicode;
 
 		for( const c of str ) {
@@ -82,10 +83,9 @@ defineEncoding({
 	name: 'UCS2toJIS',
 
 	convert: function( str ) {
-		let unknownJis = JISInverted[ unknown ],
-				jisBuf     = new Uint8Array( str.length * 4 ), // max 4 bytes per char
-				offset     = 0,
-				sequence   = 0,
+		let jisBuf   = new Uint8Array( str.length * 4 ), // max 4 bytes per char
+				offset   = 0,
+				sequence = 0,
 				unicode;
 
 		for( const c of str ) {
@@ -169,10 +169,9 @@ defineEncoding({
 	name: 'UCS2toEUCJP',
 
 	convert: function( str ) {
-		let unknownJis = JISInverted[ unknown ],
-				len        = str.length,
-				eucBuf     = new Uint8Array( len * 3 ), // max 3 bytes per char
-				offset     = 0,
+		let len    = str.length,
+				eucBuf = new Uint8Array( len * 3 ), // max 3 bytes per char
+				offset = 0,
 				unicode;
 
 		for( const c of str ) {
